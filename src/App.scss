@@ -4,3 +4,21 @@ footer {
   width: 100%;
   left: 0px;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.body-container {
+  height: calc(100% - 6.375rem);
+  & > .row {
+    height: 100%;
+  }
+}
+
+.right-side-component-container {
+  height: 100%;
+}
