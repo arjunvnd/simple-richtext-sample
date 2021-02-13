@@ -3,15 +3,17 @@ import PropTypes from "prop-types";
 import BackButton from "../Inputs/Buttons/BackButton";
 import SaveButton from "../Inputs/Buttons/SaveButton";
 
-function ActionButtons(props) {
+function ActionButtons({ handleSaveClick, handleBackClick }) {
   return (
     <div>
-      <SaveButton />
-      <BackButton />
+      <SaveButton handleClick={handleSaveClick} />
+      <BackButton handleClick={handleBackClick} />
     </div>
   );
 }
 
-ActionButtons.propTypes = {};
+ActionButtons.propTypes = {
+  handleBackClick: PropTypes.func,
+};
 
 export default ActionButtons;

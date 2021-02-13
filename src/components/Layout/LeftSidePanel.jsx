@@ -1,22 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ListGroup } from "react-bootstrap";
+import { connect } from "react-redux";
 
 function LeftSidePanel({ ebookData, activeTab, handleClick }) {
   return (
     <>
       <ListGroup>
-        {ebookData.map((ebookChapter) => {
-          return (
-            <ListGroup.Item
-              onClick={handleClick}
-              action
-              active={ebookChapter.id === activeTab}
-            >
-              {ebookChapter.title}
-            </ListGroup.Item>
-          );
-        })}
+        {ebookData.length ? (
+          ebookData.map((ebookChapter) => {
+            return (
+              <ListGroup.Item
+                onClick={handleClick}
+                action
+                active={ebookChapter.id === activeTab}
+              >
+                {ebookChapter.title}
+              </ListGroup.Item>
+            );
+          })
+        ) : (
+          <>Please add a new page to start</>
+        )}
       </ListGroup>
     </>
   );
@@ -33,14 +38,13 @@ LeftSidePanel.propTypes = {
 };
 
 LeftSidePanel.defaultProps = {
-  ebookData: [
-    { id: 1, title: "Chapter One" },
-    { id: 2, title: "Chapter Two" },
-    { id: 3, title: "Chapter Three" },
-    { id: 4, title: "Chapter Four" },
-  ],
+  ebookData: [],
   activeTab: 1,
   handleClick: () => null,
 };
 
-export default LeftSidePanel;
+const mapStateToProps = (state) => ({
+  ebookData: state.ebookData,
+});
+
+export default connect(mapStateToProps)(LeftSidePanel);

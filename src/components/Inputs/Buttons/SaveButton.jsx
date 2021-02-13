@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "bootstrap";
+import Button from "react-bootstrap/Button";
 
 function SaveButton(props) {
   return (
     <>
-      <Button as="input" type="button" value="Save Page" />
+      <Button variant="primary">Save Page</Button>
     </>
   );
 }

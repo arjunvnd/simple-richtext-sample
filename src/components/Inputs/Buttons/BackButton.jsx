@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "bootstrap";
+
+import Button from "react-bootstrap/Button";
 
 function BackButton({ handleClick }) {
   return (
     <>
-      <Button as="input" type="button" value="Back to Book" />
+      <Button onClick={handleClick} variant="warning">
+        Back to Book
+      </Button>
     </>
   );
 }

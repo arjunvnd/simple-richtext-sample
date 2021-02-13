@@ -2,18 +2,35 @@ import React from "react";
 import PropTypes from "prop-types";
 import AddNewPageSection from "./AddNewPageSection";
 import PageContent from "./PageContent";
+import DefaultPageView from "./DefaultPageView";
+import { connect } from "react-redux";
+import { EDITOR_STATES } from "../../../config/constants";
+import EditComponent from "../../RIchTextEditor/EditComponent";
 
-function RightSideComponent(props) {
+function RightSideComponent({ editorState }) {
   return (
     <section className="right-side-component-container">
-      <>
-        <PageContent />
-      </>
-      <AddNewPageSection />
+      {editorState === EDITOR_STATES.IDLE ? (
+        <DefaultPageView />
+      ) : (
+        <EditComponent />
+      )}
     </section>
   );
 }
 
-RightSideComponent.propTypes = {};
+RightSideComponent.propTypes = {
+  editorState: PropTypes.string,
+};
 
-export default RightSideComponent;
+RightSideComponent.defaultProps = {
+  editorState: EDITOR_STATES.IDLE,
+};
+
+const mapStateToProps = (state) => ({
+  editorState: state.editorState,
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RightSideComponent);

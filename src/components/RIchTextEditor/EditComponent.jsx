@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
 import { convertFromRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
@@ -10,16 +10,33 @@ import TitleInput from "./TitleInput";
 import RichTextEditor from "./RichTextEditor";
 import ActionButtons from "./ActionButtons";
 import { connect } from "react-redux";
-import { addNewChapter, setAddState } from "../../redux/actions/basic";
+import {
+  addNewChapter,
+  setAddState,
+  setIdleState,
+} from "../../redux/actions/basic";
 
-function EditComponent({ currentText }) {
+function EditComponent({ currentText, setEditorStateToIdle }) {
   const [editorState, setEditorState] = React.useState(
-    convertFromRaw(currentText)
+    EditorState.createEmpty()
   );
+
+  useEffect(() => {
+    const contentBlock = htmlToDraft(currentText);
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(
+        contentBlock.contentBlocks
+      );
+      const newEditorState = EditorState.createWithContent(contentState);
+      setEditorState(newEditorState);
+    }
+  }, [currentText]);
 
   const handleSaveClick = () => {};
 
-  const handleBackClick = () => {};
+  const handleBackClick = () => {
+    setEditorStateToIdle();
+  };
 
   return (
     <>
@@ -28,13 +45,26 @@ function EditComponent({ currentText }) {
         editorState={editorState}
         setEditorState={setEditorState}
       />
-      <ActionButtons />
+      <ActionButtons
+        handleSaveClick={handleSaveClick}
+        handleBackClick={handleBackClick}
+      />
     </>
   );
 }
 
-EditComponent.propTypes = {};
+EditComponent.propTypes = {
+  currentText: PropTypes.node,
+  setEditorStateToIdle: PropTypes.func,
+};
 
-const mapDispatchToProps = (dispatch) => ({});
+EditComponent.defaultProps = {
+  currentText: "<p>this is a test</p>",
+  setEditorStateToIdle: () => null,
+};
 
-export default connect()(EditComponent);
+const mapDispatchToProps = (dispatch) => ({
+  setEditorStateToIdle: () => dispatch(setIdleState()),
+});
+
+export default connect(null, mapDispatchToProps)(EditComponent);

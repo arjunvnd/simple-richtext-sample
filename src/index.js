@@ -8,6 +8,7 @@ import { HashRouter as Router } from "react-router-dom";
 import history from "./utils/history";
 import store from "./redux/store";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 ReactDOM.render(
   <React.StrictMode>
