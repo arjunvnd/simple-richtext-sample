@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { EditorState, convertToRaw, ContentState } from "draft-js";
@@ -15,14 +15,34 @@ import {
   setAddState,
   setIdleState,
 } from "../../redux/actions/basic";
+import { EDITOR_STATES } from "../../config/constants";
 
-function EditComponent({ currentText, setEditorStateToIdle }) {
-  const [editorState, setEditorState] = React.useState(
-    EditorState.createEmpty()
+const defaultChapterObj = {
+  title: "Chapter Name",
+  description: "<p>Your description goes here</p>",
+};
+
+function EditComponent({
+  description,
+  setEditorStateToIdle,
+  currentEditorState,
+  currentTitle,
+  saveChapterToState,
+}) {
+  const [title, setTitle] = useState(
+    currentEditorState === EDITOR_STATES.ADD
+      ? defaultChapterObj.title
+      : currentTitle
   );
 
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
   useEffect(() => {
-    const contentBlock = htmlToDraft(currentText);
+    const contentBlock = htmlToDraft(
+      currentEditorState === EDITOR_STATES.ADD
+        ? defaultChapterObj.description
+        : description
+    );
     if (contentBlock) {
       const contentState = ContentState.createFromBlockArray(
         contentBlock.contentBlocks
@@ -30,17 +50,27 @@ function EditComponent({ currentText, setEditorStateToIdle }) {
       const newEditorState = EditorState.createWithContent(contentState);
       setEditorState(newEditorState);
     }
-  }, [currentText]);
+  }, [description]);
 
-  const handleSaveClick = () => {};
+  const handleSaveClick = () => {
+    const payload = {
+      title,
+      description: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+    };
+    saveChapterToState(payload);
+  };
 
   const handleBackClick = () => {
     setEditorStateToIdle();
   };
 
+  const handleTitleChage = (e) => {
+    setTitle(e.target.value);
+  };
+
   return (
     <>
-      <TitleInput />
+      <TitleInput title={title} handleTitleChage={handleTitleChage} />
       <RichTextEditor
         editorState={editorState}
         setEditorState={setEditorState}
@@ -54,17 +84,24 @@ function EditComponent({ currentText, setEditorStateToIdle }) {
 }
 
 EditComponent.propTypes = {
-  currentText: PropTypes.node,
+  description: PropTypes.node,
   setEditorStateToIdle: PropTypes.func,
+  saveChapterToState: PropTypes.func,
 };
 
 EditComponent.defaultProps = {
-  currentText: "<p>this is a test</p>",
+  description: "<p>this is a test</p>",
   setEditorStateToIdle: () => null,
+  saveChapterToState: () => null,
 };
+
+const mapStateToProps = (state) => ({
+  currentEditorState: state.editorState,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   setEditorStateToIdle: () => dispatch(setIdleState()),
+  saveChapterToState: (data) => dispatch(addNewChapter(data)),
 });
 
-export default connect(null, mapDispatchToProps)(EditComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(EditComponent);

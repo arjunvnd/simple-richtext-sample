@@ -2,10 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 
-function SaveButton(props) {
+function SaveButton({ handleClick }) {
   return (
     <>
-      <Button variant="primary">Save Page</Button>
+      <Button onClick={handleClick} variant="primary">
+        Save Page
+      </Button>
     </>
   );
 }

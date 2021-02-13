@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { EDITOR_STATES } from "../../../config/constants";
 import EditComponent from "../../RIchTextEditor/EditComponent";
 
-function RightSideComponent({ editorState }) {
+function RightSideComponent({ editorState, ebookData, selectedChapter }) {
   return (
     <section className="right-side-component-container">
       {editorState === EDITOR_STATES.IDLE ? (
@@ -29,6 +29,8 @@ RightSideComponent.defaultProps = {
 
 const mapStateToProps = (state) => ({
   editorState: state.editorState,
+  ebookData: state.ebookData,
+  selectedChapter: state.selectedChapter,
 });
 
 const mapDispatchToProps = (dispatch) => ({});

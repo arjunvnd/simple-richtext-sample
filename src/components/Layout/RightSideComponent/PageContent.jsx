@@ -23,21 +23,7 @@ PageContent.propTypes = {
 };
 
 PageContent.defaultProps = {
-  selectedPage: {
-    id: 1,
-    title: "Chapter One",
-    value: `Fusce laoreet maximus mi, vitae tristique mi lacinia ac. Fusce
-       et diam arcu. Phasellus dolor arcu, accumsan vel porttitor ac, 
-       tincidunt eget libero. Duis dapibus posuere lacus quis tempus. 
-       Sed a eros faucibus, egestas turpis id, pulvinar purus. Donec bibendum 
-       lorem ligula, sed porttitor ligula congue quis. Duis euismod facilisis
-       felis. Praesent tellus purus, ultricies eget iaculis id, placerat vulputate
-        quam. Etiam lacinia elementum lacinia. Ut convallis lacus vitae ex sodales
-         condimentum. Nunc vel porttitor sem. Suspendisse ut augue elit. Orci varius 
-         natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          Class aptent taciti sociosqu 
-      ad litora torquent per conubia nostra, per inceptos himenaeos.`,
-  },
+  selectedPage: {},
 };
 
 export default PageContent;
