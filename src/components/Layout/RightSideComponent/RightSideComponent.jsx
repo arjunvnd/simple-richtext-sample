@@ -6,9 +6,9 @@ import PageContent from "./PageContent";
 function RightSideComponent(props) {
   return (
     <section className="right-side-component-container">
-      <div>
+      <>
         <PageContent />
-      </div>
+      </>
       <AddNewPageSection />
     </section>
   );

@@ -9,6 +9,10 @@ export const setIdleState = () => ({
   type: actionTypes.SET_IDLE_STATE,
 })
 
+export const setAddState = () => ({
+  type: actionTypes.SET_ADD_STATE,
+})
+
 export const addNewChapter = (payload) => ({
   type: actionTypes.ADD_NEW_CHAPTER,
   payload

@@ -7,5 +7,6 @@ export const API_STATUS = {
 
 export const EDITOR_STATES = {
     IDLE: 'IDLE',
-    EDITING: 'EDITING'
+    EDITING: 'EDITING',
+    ADD: 'ADD'
 }

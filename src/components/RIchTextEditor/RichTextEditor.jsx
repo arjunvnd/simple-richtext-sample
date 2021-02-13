@@ -7,15 +7,13 @@ import { convertFromRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 
-function RichTextEditor({ currentText }) {
-  const [editorState, setEditorState] = React.useState(convertFromRaw(content));
-
+function RichTextEditor({ editorState, setEditorState }) {
   const onEditorStateChange = (editorState) => {
     setEditorState(editorState);
   };
 
   return (
-    <div>
+    <div className="editor-container">
       <Editor
         editorState={editorState}
         wrapperClassName="rich-text-wrapper"
@@ -27,11 +25,13 @@ function RichTextEditor({ currentText }) {
 }
 
 RichTextEditor.propTypes = {
-  currentText: PropTypes.node,
+  editorState: PropTypes.node,
+  setEditorState: PropTypes.func,
 };
 
 RichTextEditor.defaultProps = {
   currentText: "",
+  setEditorState: () => null,
 };
 
 export default RichTextEditor;

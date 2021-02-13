@@ -8,7 +8,7 @@ function AddNewPageSection(props) {
     <Container className="add-new-page-section">
       <Row>
         <Col>
-          Add New Page <AddButton />
+          <AddButton />
         </Col>
       </Row>
     </Container>

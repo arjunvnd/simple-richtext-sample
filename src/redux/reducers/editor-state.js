@@ -15,6 +15,8 @@ const editorState = (state = initialState, {
             return EDITOR_STATES.EDITING
         case actionTypes.SET_IDLE_STATE:
             return EDITOR_STATES.IDLE
+        case actionTypes.SET_ADD_STATE:
+            return EDITOR_STATES.ADD
         default:
             return state
     }

@@ -1,4 +1,10 @@
 /* Exports all the action */
 
-export { add } from "./basic";
+export {
+    addNewChapter,
+    editChapter,
+    setEditState,
+    setIdleState,
 
+}
+from "./basic";
