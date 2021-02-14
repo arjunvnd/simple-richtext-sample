@@ -23,6 +23,7 @@ function LeftSidePanel({
           ? ebookData.map((ebookChapter) => {
               return (
                 <ListGroup.Item
+                  variant="secondary"
                   onClick={() => handlePageClick(Number(ebookChapter.id))}
                   action
                   active={ebookChapter.id === activeTab}

@@ -3,7 +3,7 @@ import { Navbar } from "react-bootstrap";
 
 export default function Header() {
   return (
-    <Navbar bg="light">
+    <Navbar variant="dark" bg="primary">
       <Navbar.Brand>Ebook-Editor</Navbar.Brand>
     </Navbar>
   );
