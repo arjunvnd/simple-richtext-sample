@@ -6,14 +6,19 @@ import Home from "./pages/Home";
 import Layout from "./components/Layout/Layout";
 import { connect } from "react-redux";
 import { intialiseState } from "./redux/actions/basic";
+import { sampleData } from "./config/sample-data";
 
 function App({ ebookData, loadIntialData }) {
   useEffect(() => {
     if (ebookData.length === 0) {
       const eBookData = localStorage.getItem("ebookData");
-      if (eBookData) loadIntialData(JSON.parse(eBookData));
+      if (eBookData) {
+        loadIntialData(JSON.parse(eBookData));
+      } else {
+        localStorage.setItem("ebookData", JSON.stringify(sampleData));
+        loadIntialData(sampleData);
+      }
     } else {
-      console.log("ebookData", ebookData);
       localStorage.setItem("ebookData", JSON.stringify(ebookData));
     }
   }, [ebookData]);
