@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./App.scss";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./components/Layout/Layout";
+import { connect } from "react-redux";
+import { intialiseState } from "./redux/actions/basic";
 
-function App() {
+function App({ ebookData, loadIntialData }) {
+  useEffect(() => {
+    if (ebookData.length === 0) {
+      const eBookData = localStorage.getItem("ebookData");
+      if (eBookData) loadIntialData(JSON.parse(eBookData));
+    } else {
+      console.log("ebookData", ebookData);
+      localStorage.setItem("ebookData", JSON.stringify(ebookData));
+    }
+  }, [ebookData]);
+
   return (
     <Layout>
       <Switch>
@@ -17,4 +29,12 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  ebookData: state.ebookData,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadIntialData: (data) => dispatch(intialiseState(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

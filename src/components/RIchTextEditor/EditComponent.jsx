@@ -14,6 +14,7 @@ import {
   addNewChapter,
   setAddState,
   setIdleState,
+  updateChapter,
 } from "../../redux/actions/basic";
 import { EDITOR_STATES } from "../../config/constants";
 
@@ -28,6 +29,8 @@ function EditComponent({
   currentEditorState,
   currentTitle,
   saveChapterToState,
+  selectedChapter,
+  editChapterState,
 }) {
   const [title, setTitle] = useState(
     currentEditorState === EDITOR_STATES.ADD
@@ -57,7 +60,11 @@ function EditComponent({
       title,
       description: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     };
-    saveChapterToState(payload);
+    if (currentEditorState === EDITOR_STATES.ADD) saveChapterToState(payload);
+    if (currentEditorState === EDITOR_STATES.EDITING)
+      editChapterState({ id: selectedChapter, ...payload });
+
+    setEditorStateToIdle();
   };
 
   const handleBackClick = () => {
@@ -97,11 +104,13 @@ EditComponent.defaultProps = {
 
 const mapStateToProps = (state) => ({
   currentEditorState: state.editorState,
+  selectedChapter: state.selectedChapter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setEditorStateToIdle: () => dispatch(setIdleState()),
   saveChapterToState: (data) => dispatch(addNewChapter(data)),
+  editChapterState: (data) => dispatch(updateChapter(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditComponent);

@@ -4,15 +4,20 @@ import { FormControl, InputGroup } from "react-bootstrap";
 
 function TitleInput({ title, handleTitleChage }) {
   return (
-    <InputGroup>
-      <FormControl
-        value={title}
-        onChange={handleTitleChage}
-        placeholder="Title"
-        aria-label="Title"
-        aria-describedby="basic-addon1"
-      />
-    </InputGroup>
+    <>
+      <label>
+        <h6>Page Title</h6>
+      </label>
+      <InputGroup>
+        <FormControl
+          value={title}
+          onChange={handleTitleChage}
+          placeholder="Title"
+          aria-label="Title"
+          aria-describedby="basic-addon1"
+        />
+      </InputGroup>
+    </>
   );
 }
 

@@ -8,12 +8,16 @@ import { EDITOR_STATES } from "../../../config/constants";
 import EditComponent from "../../RIchTextEditor/EditComponent";
 
 function RightSideComponent({ editorState, ebookData, selectedChapter }) {
+  const selectedPage = ebookData.find((page) => page.id === selectedChapter);
   return (
     <section className="right-side-component-container">
       {editorState === EDITOR_STATES.IDLE ? (
-        <DefaultPageView />
+        <DefaultPageView selectedPage={selectedPage} />
       ) : (
-        <EditComponent />
+        <EditComponent
+          currentTitle={selectedPage && selectedPage.title}
+          description={selectedPage && selectedPage.description}
+        />
       )}
     </section>
   );

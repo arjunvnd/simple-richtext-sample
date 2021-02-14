@@ -16,8 +16,8 @@ function RichTextEditor({ editorState, setEditorState }) {
     <div className="editor-container">
       <Editor
         editorState={editorState}
-        wrapperClassName="rich-text-wrapper"
-        editorClassName="rich-text-editor"
+        wrapperClassName="demo-wrapper"
+        editorClassName="demo-editor"
         onEditorStateChange={onEditorStateChange}
       />
     </div>

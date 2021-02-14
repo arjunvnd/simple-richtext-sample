@@ -3,21 +3,31 @@ import PropTypes from "prop-types";
 import PageContent from "./PageContent";
 import AddNewPageSection from "./AddNewPageSection";
 import { connect } from "react-redux";
+import InfoText from "../../InfoText";
 
-function DefaultPageView({ ebookData, selectedChapter }) {
+function DefaultPageView({ selectedPage }) {
   return (
     <>
-      <PageContent />
+      <div className="default-view-container">
+        {selectedPage ? (
+          <PageContent selectedPage={selectedPage} />
+        ) : (
+          <InfoText />
+        )}
+      </div>
       <AddNewPageSection />
     </>
   );
 }
 
-DefaultPageView.propTypes = {};
+DefaultPageView.propTypes = {
+  selectedPage: PropTypes.shape({}),
+};
 
-const mapStateToProps = (state) => ({
-  ebookData: state.ebookData,
-  selectedChapter: state.selectedChapter,
-});
+// const mapStateToProps = (state) => ({
+//   ebookData: state.ebookData,
+//   selectedChapter: state.selectedChapter,
+// });
 
-export default connect(mapStateToProps)(DefaultPageView);
+export default DefaultPageView;
+// export default connect(mapStateToProps)(DefaultPageView);

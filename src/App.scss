@@ -11,10 +11,12 @@ body,
   height: 100%;
   width: 100%;
   font-size: 1em;
+  overflow: hidden;
+  background-color: lightgray;
 }
 
 .body-container {
-  height: calc(100% - 6.375rem);
+  height: calc(100% - 7rem);
   & > .row {
     height: 100%;
   }
@@ -22,6 +24,13 @@ body,
 
 .right-side-component-container {
   height: 100%;
+  & > label {
+    margin: 0;
+    margin-top: 1em;
+  }
+  & > .input-group {
+    margin: 1em 0em;
+  }
 }
 
 .add-new-page-section {
@@ -33,7 +42,7 @@ body,
   }
 }
 
-article {
+.default-view-container {
   height: calc(100% - 2.625rem);
 }
 
@@ -47,5 +56,36 @@ button.icon-button {
   }
   svg {
     font-size: 1rem;
+  }
+}
+
+.add-item-info {
+  position: absolute;
+  top: calc(50% - 3rem);
+}
+
+.demo-editor {
+  border: 1px solid #f1f1f1 !important;
+  padding: 5px !important;
+  border-radius: 2px !important;
+  background-color: #fff;
+  height: 30em !important;
+}
+
+.editor-container {
+  height: calc(100% - 10.5em);
+}
+
+.demo-wrapper {
+  height: 100%;
+}
+
+.action-button-wrapper {
+  position: absolute;
+  z-index: 100;
+  right: 0pc;
+  padding-right: 1em;
+  & > button {
+    margin-left: 10px;
   }
 }

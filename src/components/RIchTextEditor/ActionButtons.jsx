@@ -5,7 +5,7 @@ import SaveButton from "../Inputs/Buttons/SaveButton";
 
 function ActionButtons({ handleSaveClick, handleBackClick }) {
   return (
-    <div>
+    <div className="action-button-wrapper">
       <SaveButton handleClick={handleSaveClick} />
       <BackButton handleClick={handleBackClick} />
     </div>
