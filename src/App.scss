@@ -1,3 +1,23 @@
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 footer {
   position: fixed;
   bottom: 0;
@@ -19,6 +39,14 @@ body,
   height: calc(100% - 7rem);
   & > .row {
     height: 100%;
+    max-height: 100%;
+    & > div {
+      height: 100%;
+      max-height: 100%;
+      &:nth-child(1) {
+        overflow: auto;
+      }
+    }
   }
 }
 
@@ -44,6 +72,7 @@ body,
 
 .default-view-container {
   height: calc(100% - 2.625rem);
+  max-height: calc(100% - 2.625rem);
 }
 
 button.icon-button {
@@ -69,7 +98,8 @@ button.icon-button {
   padding: 5px !important;
   border-radius: 2px !important;
   background-color: #fff;
-  height: 30em !important;
+  height: calc(100% - 10em) !important;
+  max-height: calc(100% - 10em) !important;
 }
 
 .editor-container {
@@ -87,5 +117,28 @@ button.icon-button {
   padding-right: 1em;
   & > button {
     margin-left: 10px;
+  }
+}
+.public-DraftEditor-content[contenteditable="true"] {
+  height: 100px !important;
+}
+
+h2.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    display: flex;
+    align-items: center;
+  }
+}
+
+article {
+  height: 100%;
+  max-height: 100%;
+  & > div {
+    height: calc(100% - 4rem);
+    max-height: calc(100% - 4rem);
+    overflow-y: auto;
   }
 }

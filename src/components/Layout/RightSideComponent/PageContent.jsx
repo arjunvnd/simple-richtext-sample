@@ -10,7 +10,7 @@ function PageContent({ selectedPage }) {
 
   return (
     <article>
-      <h2>
+      <h2 className="title">
         {selectedPage.title}
         <EditButton />
       </h2>
